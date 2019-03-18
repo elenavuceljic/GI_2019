@@ -36,29 +36,6 @@ class IndexSorted(AlgorithmWithIndexStructure):
         return [h[1] for h in hits]  # return just the offsets
 
 
-class IndexHash(AlgorithmWithIndexStructure):
-
-    def initWithText(self):
-        pass
-
-    def __init__(self, t, ln):
-        """ Create index, extracting substrings of length 'ln' """
-        self.t = t
-        self.ln = ln
-        # What is ival for?
-        self.index = {}
-        for i in range(len(t) - ln + 1):
-            substr = t[i:i + ln]
-            if substr in self.index:
-                self.index[substr].append(i)  # substring already in dictionary
-            else:
-                self.index[substr] = [i]  # add to dictionary
-
-    def query(self, text, p):
-        """ Return candidate alignments for p """
-        return self.index.get(p[:self.ln], [])
-
-
 class SuffixTree(AlgorithmWithIndexStructure):
     def initWithText(self):
         pass

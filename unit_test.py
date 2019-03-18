@@ -1,8 +1,7 @@
 import os
-from enum import Enum
-from main import AlgorithmWithIndexStructure
+from pathlib import Path
 
-unit_tests_dir = "\\Tests\\Unit\\"
+unit_tests_dir = Path("Tests/Unit/")
 
 
 class UnitTestResult(object):
@@ -30,16 +29,16 @@ class UnitTestResult(object):
 
 def run_algorithm_tests(algorithm):
 
-    tests_dir = os.getcwd()+unit_tests_dir
+    tests_dir = unit_tests_dir
     test_files = []
     results = []
 
     for file in os.listdir(tests_dir):
-        test_files.append(os.path.abspath(tests_dir+file))
+        test_files.append(tests_dir / file)
 
     for test_file_name in test_files:
 
-        test_file = open(test_file_name,'r')
+        test_file = open(test_file_name, 'r')
         lines = test_file.readlines()
 
         name = lines[0].rstrip('\n')
@@ -66,4 +65,3 @@ def run_algorithm_tests(algorithm):
 def print_test_results(results):
     for result in results:
         print(result.get_description())
-
